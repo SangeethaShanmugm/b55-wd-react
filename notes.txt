@@ -1,0 +1,36 @@
+useState => hooks  => function 
+
+const [state, setState] = useState(initialValue)
+const [like, setLike] = useState(10)
+
+state => current scenario
+state of the art technology => top technology
+state of mind => currently wants running in my mind
+
+setState => function  => update the current state
+
+
+
+// JSX => JS XML =>html, css
+//className => class => reserved keyword
+// {} => template syntax
+
+// create a custom component
+// 1. First letter must be capital
+// 2. It should return JSX
+
+
+
+ {/* {user.map((usr) => (
+        <Msg pic={usr.pic} name={usr.name} />
+      ))} */}
+
+      {/* {people.map((person) => (
+        <Welcome name={person} />
+      ))} */}
+      {/* <Welcome name="Asha" age="20" />
+      <Welcome name="Ajay" age="21" />
+      <Msg pic="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" name="Ajay" />
+      <Msg pic="https://images.pexels.com/photos/3792581/pexels-photo-3792581.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" name="Asha" /> */}
+
+      
