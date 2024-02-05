@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .add-color {
   display: flex;
   justify-content: center;
@@ -9,3 +5,26 @@
   align-items: flex-start;
   gap: 20px;
 }
+
+.product-container {
+  width: 300px;
+}
+
+.product-poster {
+  width: 300px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.product-spec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-summary {
+  font-size: 12px;
+  text-align: justify;
+}
+
+
