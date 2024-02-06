@@ -1,4 +1,4 @@
-function Msg({ pic, name }) {
+export function Msg({ pic, name }) {
   // const pic = profile
   return (
     <div>

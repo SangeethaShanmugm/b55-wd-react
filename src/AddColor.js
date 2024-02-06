@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ColorBox } from "./ColorBox";
 
-function AddColor() {
+export function AddColor() {
 
   // const color = "skyblue"
   const [color, setColor] = useState("skyblue");
@@ -20,8 +20,8 @@ function AddColor() {
         {/* copy colorList and add new color */}
         <button onClick={() => setColorList([...colorList, color])}>Add Color</button>
       </div>
-      {colorList.map((clr) => (
-        <ColorBox color={clr} />
+      {colorList.map((clr, index) => (
+        <ColorBox key={index} color={clr} />
       ))}
 
     </div>

@@ -1,9 +1,13 @@
-import { useState } from "react";
 import "./App.css";
-import { Counter } from "./Counter";
 import profile from "./profile1.jpeg"
+import { Routes, Route, Link } from "react-router-dom"
+import { AddColor } from "./AddColor"
+import { UserList } from "./UserList"
+import { ProductList } from "./component/ProductList";
+import { Home } from "./component/Home";
 
-const INITIAL_PRODUCT_LIST = [
+
+export const INITIAL_PRODUCT_LIST = [
   {
     name: " iPhone 15 (128 GB)",
     poster: "https://m.media-amazon.com/images/I/71d7rfSl0wL._AC_UY218_.jpg",
@@ -18,7 +22,7 @@ const INITIAL_PRODUCT_LIST = [
     price: "₹1,34,900 ",
     rating: 3.5,
     summary:
-      " iPhone 15 Pro has a strong and light aerospace-grade titanium design with a textured matte-glass back. It also features a Ceramic Shield front that’s tougher than any smartphone glass. And it’s splash, water, and dust resistant.",
+      " iPhone 15 Pro has Link strong and light aerospace-grade titanium design with Link textured matte-glass back. It also features Link Ceramic Shield front that’s tougher than any smartphone glass. And it’s splash, water, and dust resistant.",
   },
   {
     name: "Samsung Galaxy S23 5G (256GB Storage) ",
@@ -34,7 +38,7 @@ const INITIAL_PRODUCT_LIST = [
     price: "₹1,00,000",
     rating: 5.0,
     summary:
-      "Create crystal-clear content worth sharing with Galaxy S23 Ultra’s 200MP camera — the highest camera resolution on a phone; Whether you’re posting or printing, Galaxy S23 Ultra always does the moment justice.",
+      "Create crystal-clear content worth sharing with Galaxy S23 Ultra’s 200MP camera — the highest camera resolution on Link phone; Whether you’re posting or printing, Galaxy S23 Ultra always does the moment justice.",
   },
   {
     name: "Apple AirPods Pro (2nd Generation) ​​​​​​​ ",
@@ -88,50 +92,28 @@ const INITIAL_PRODUCT_LIST = [
 
 
 function App() {
-  const productList = INITIAL_PRODUCT_LIST
+
 
   return (
     <div className="App">
-      <div className="product-list">
-        {productList.map((pd, index) => (
-          <Product key={index} product={pd} />
-        ))}
-      </div>
+      <nav>
+        <ul>
+          {/* Link change page without refresh */}
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/products">ProductList</Link></li>
+          <li><Link to="/add-color">AddColor</Link></li>
+          <li><Link to="/profile">UserList</Link></li>
+        </ul>
+      </nav>
 
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/add-color" element={<AddColor />} />
+        <Route path="/profile" element={<UserList />} />
+      </Routes>
     </div>
   );
-
-}
-
-function Product({ product }) {
-
-  const [show, setShow] = useState(true)
-
-  const ratingStyle = {
-    color: product.rating >= 4.5 ? "green" : "red",
-    fontSize: "20px"
-  }
-  //true  => block => visible
-  //false => none => hide
-  const summaryStyle = {
-    display: show ? "block" : "none"
-  }
-  return (
-    <div className="product-container">
-      <img className="product-poster" src={product.poster} alt={product.name} />
-      <div className="product-spec">
-        <h5 className="product-name">{product.name}</h5>
-        <h6 style={ratingStyle}> ⭐{product.rating}</h6>
-      </div>
-      <button onClick={() => setShow(!show)}>Toggle Description</button>
-      <p style={summaryStyle} className="product-summary">{product.summary}</p>
-      <div className="product-spec">
-        <h6>{product.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</h6>
-        <button>Add To Cart</button>
-      </div>
-      <Counter />
-    </div>
-  )
 }
 
 export default App;
