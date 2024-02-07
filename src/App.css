@@ -36,3 +36,10 @@
   gap: 20px;
   flex-wrap: wrap;
 }
+
+.add-products {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+}

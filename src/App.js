@@ -1,6 +1,6 @@
 import "./App.css";
 import profile from "./profile1.jpeg"
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route, Link, useParams } from "react-router-dom"
 import { AddColor } from "./AddColor"
 import { UserList } from "./UserList"
 import { ProductList } from "./component/ProductList";
@@ -109,11 +109,21 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductList />} />
+        <Route path="/products/:productId" element={<ProductDetails />} />
+
         <Route path="/add-color" element={<AddColor />} />
         <Route path="/profile" element={<UserList />} />
       </Routes>
     </div>
   );
+}
+
+function ProductDetails() {
+  const { productId } = useParams()
+
+  return (
+    <h1>ProductDetails Page - {productId}</h1>
+  )
 }
 
 export default App;

@@ -27,7 +27,7 @@ export function Product({ product, id }) {
       </div>
       <button onClick={() => setShow(!show)}>Toggle Description</button>
 
-      <button onClick={() => navigate("/products/" + id)}>Info</button>
+      <button onClick={() => navigate(`/products/${id}`)}>Info</button>
 
       {/* conditional styling */}
       {/* <p style={summaryStyle} className="product-summary">{product.summary}</p> */}
