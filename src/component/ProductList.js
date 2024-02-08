@@ -1,6 +1,9 @@
 import { Product } from "./Product";
 import { INITIAL_PRODUCT_LIST } from "../App";
 import { useState, useEffect } from "react";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 
 export function ProductList() {
   const [productList, setProductList] = useState(INITIAL_PRODUCT_LIST);
@@ -44,23 +47,29 @@ export function ProductList() {
   return (
     <div>
       <div className="add-products">
-        <input type="text" placeholder="Name" value={name}
+
+        <TextField id="name" label="Name" variant="outlined" value={name}
           onChange={(event) => setName(event.target.value)}
         />
-        <input type="text" placeholder="Poster" value={poster}
+
+
+        <TextField id="poster" label="Poster" variant="outlined" value={poster}
           onChange={(event) => setPoster(event.target.value)}
         />
-        <input type="text" placeholder="Price" value={price}
+
+        <TextField id="price" label="Price" variant="outlined" value={price}
           onChange={(event) => setPrice(event.target.value)}
         />
-        <input type="text" placeholder="Rating" value={rating}
+
+        <TextField id="rating" label="Rating" variant="outlined" value={rating}
           onChange={(event) => setRating(event.target.value)}
         />
-        <input type="text" placeholder="Summary" value={summary}
+
+        <TextField id="summary" label="Summary" variant="outlined" value={summary}
           onChange={(event) => setSummary(event.target.value)}
         />
 
-        <button onClick={handleAddProduct}>Add Product</button>
+        <Button variant="contained" onClick={handleAddProduct}>Add Product</Button>
       </div>
       <div className="product-list">
         {productList.map((pd, index) => (

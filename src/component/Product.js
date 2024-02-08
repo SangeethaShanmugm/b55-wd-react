@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Counter } from "../Counter";
 import { useNavigate } from "react-router-dom"
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import InfoIcon from '@mui/icons-material/Info';
+import Button from '@mui/material/Button';
+
 
 export function Product({ product, id }) {
 
@@ -23,18 +29,31 @@ export function Product({ product, id }) {
       <img className="product-poster" src={product.poster} alt={product.name} />
       <div className="product-spec">
         <h5 className="product-name">{product.name} - {id} </h5>
-        <h6 style={ratingStyle}> ⭐{product.rating}</h6>
+        <p style={ratingStyle}> ⭐{product.rating}</p>
       </div>
-      <button onClick={() => setShow(!show)}>Toggle Description</button>
 
-      <button onClick={() => navigate(`/products/${id}`)}>Info</button>
+      <IconButton aria-label="toggleDesc" color="primary"
+        onClick={() => setShow(!show)}>
+        {show ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+      </IconButton>
+
+      {/* <button >Toggle Description</button> */}
+
+
+      <IconButton aria-label="info" color="primary"
+        onClick={() => navigate(`/products/${id}`)}>
+        <InfoIcon />
+      </IconButton>
+
+      {/* <button >Info</button> */}
 
       {/* conditional styling */}
       {/* <p style={summaryStyle} className="product-summary">{product.summary}</p> */}
       {show ? <p className="product-summary">{product.summary}</p> : null}
       <div className="product-spec">
-        <h6>{product.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</h6>
-        <button>Add To Cart</button>
+        <h4>{product.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</h4>
+        <Button variant="contained">Add To Cart</Button>
+
       </div>
       <Counter />
     </div>
