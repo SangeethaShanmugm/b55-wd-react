@@ -51,7 +51,7 @@ export function Product({ product, id }) {
       {/* <p style={summaryStyle} className="product-summary">{product.summary}</p> */}
       {show ? <p className="product-summary">{product.summary}</p> : null}
       <div className="product-spec">
-        <h4>{product.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</h4>
+        <h4>Price: {product.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</h4>
         <Button variant="contained">Add To Cart</Button>
 
       </div>

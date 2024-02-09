@@ -70,3 +70,20 @@ const people = ["Asha", "Ajay", "Akhilesh"]//Array of strings
   // }
   
   
+
+
+
+  ProductList(data)   =>   Product(data)   => Counter(data)
+                                 => Contact(data)
+
+unidirectional || React flows in one direction || Pass from parent to child ✅
+
+Child to Parent ❌
+
+
+                App  ⛰️ (productList, setProductList)
+
+
+
+ 
+  productList(🌊)            ProductDetail (🌊)       

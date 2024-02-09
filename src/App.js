@@ -1,11 +1,12 @@
 import "./App.css";
 import profile from "./profile1.jpeg"
-import { Routes, Route, Link, useParams } from "react-router-dom"
+import { Routes, Route, Link } from "react-router-dom"
 import { AddColor } from "./AddColor"
 import { UserList } from "./UserList"
 import { ProductList } from "./component/ProductList";
 import { Home } from "./component/Home";
-
+import { ProductDetails } from "./component/ProductDetails";
+import { useState } from "react"
 
 export const INITIAL_PRODUCT_LIST = [
   {
@@ -92,7 +93,8 @@ export const INITIAL_PRODUCT_LIST = [
 
 
 function App() {
-
+  // lifting the state up => lifted from child to parent
+  const [productList, setProductList] = useState(INITIAL_PRODUCT_LIST);
 
   return (
     <div className="App">
@@ -108,22 +110,26 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/products/:productId" element={<ProductDetails />} />
+        <Route path="/products" element={<ProductList productList={productList} setProductList={setProductList} />} />
+        <Route path="/products/:productId" element={<ProductDetails productList={productList} />} />
 
         <Route path="/add-color" element={<AddColor />} />
         <Route path="/profile" element={<UserList />} />
+
+        <Route path="*" element={<NotFoundPage />} />
+
       </Routes>
     </div>
   );
 }
 
-function ProductDetails() {
-  const { productId } = useParams()
 
+
+function NotFoundPage() {
   return (
-    <h1>ProductDetails Page - {productId}</h1>
+    <img src="https://cdn.svgator.com/images/2022/01/404-page-animation-example.gif" alt="404notfound" />
   )
 }
+
 
 export default App;

@@ -5,8 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 
-export function ProductList() {
-  const [productList, setProductList] = useState(INITIAL_PRODUCT_LIST);
+export function ProductList({ productList, setProductList }) {
 
   const [name, setName] = useState("")
   const [poster, setPoster] = useState("")
