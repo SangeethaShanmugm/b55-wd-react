@@ -1,12 +1,13 @@
 import "./App.css";
 import profile from "./profile1.jpeg"
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route, Link, Navigate } from "react-router-dom"
 import { AddColor } from "./AddColor"
 import { UserList } from "./UserList"
 import { ProductList } from "./component/ProductList";
 import { Home } from "./component/Home";
 import { ProductDetails } from "./component/ProductDetails";
 import { useState } from "react"
+import { NotFoundPage } from "./component/NotFoundPage";
 
 export const INITIAL_PRODUCT_LIST = [
   {
@@ -113,23 +114,22 @@ function App() {
         <Route path="/products" element={<ProductList productList={productList} setProductList={setProductList} />} />
         <Route path="/products/:productId" element={<ProductDetails productList={productList} />} />
 
+        <Route path="/items" element={<Navigate replace to="/products" />} />
+
+
+
         <Route path="/add-color" element={<AddColor />} />
         <Route path="/profile" element={<UserList />} />
 
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="*" element={<Navigate replace to="/404" />} />
+
 
       </Routes>
     </div>
   );
 }
 
-
-
-function NotFoundPage() {
-  return (
-    <img src="https://cdn.svgator.com/images/2022/01/404-page-animation-example.gif" alt="404notfound" />
-  )
-}
 
 
 export default App;
