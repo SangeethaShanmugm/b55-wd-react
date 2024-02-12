@@ -1,6 +1,6 @@
 import "./App.css";
 import profile from "./profile1.jpeg"
-import { Routes, Route, Link, Navigate } from "react-router-dom"
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom"
 import { AddColor } from "./AddColor"
 import { UserList } from "./UserList"
 import { ProductList } from "./component/ProductList";
@@ -8,6 +8,15 @@ import { Home } from "./component/Home";
 import { ProductDetails } from "./component/ProductDetails";
 import { useState } from "react"
 import { NotFoundPage } from "./component/NotFoundPage";
+import { AddProducts } from "./component/AddProducts";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import ExampleContext from "./component/context/ExampleContext";
 
 export const INITIAL_PRODUCT_LIST = [
   {
@@ -96,40 +105,75 @@ export const INITIAL_PRODUCT_LIST = [
 function App() {
   // lifting the state up => lifted from child to parent
   const [productList, setProductList] = useState(INITIAL_PRODUCT_LIST);
+  const [mode, setMode] = useState("light")
+  const navigate = useNavigate()
+
+  //1. creating - createContext  ✅
+  //2. Publisher - provider - context.Provider ✅
+  //3. Subscriber - useContext - useContext(context)
+
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
+
 
   return (
-    <div className="App">
-      <nav>
-        <ul>
-          {/* Link change page without refresh */}
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/products">ProductList</Link></li>
-          <li><Link to="/add-color">AddColor</Link></li>
-          <li><Link to="/profile">UserList</Link></li>
-        </ul>
-      </nav>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
+          <Button color="inherit" onClick={() => navigate("/products")}>ProductList</Button>
+          <Button color="inherit" onClick={() => navigate("/products/add")}>AddProduct</Button>
+          <Button color="inherit" onClick={() => navigate("/add-color")}>AddColor</Button>
+          <Button color="inherit" onClick={() => navigate("/profile")}>UserList</Button>
+          <Button color="inherit" onClick={() => navigate("/context")}>Context</Button>
+          <Button color="inherit"
+            startIcon={mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+            onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+            {mode === "light" ? "dark" : "light"} Mode</Button>
+        </Toolbar>
+      </AppBar>
+      <div className="App">
+        {/* <nav>
+          <ul>
+            Link change page without refresh
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/products">ProductList</Link></li>
+            <li><Link to="/products/add">AddProduct</Link></li>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductList productList={productList} setProductList={setProductList} />} />
-        <Route path="/products/:productId" element={<ProductDetails productList={productList} />} />
+            <li><Link to="/add-color">AddColor</Link></li>
+            <li><Link to="/profile">UserList</Link></li>
+          </ul>
+        </nav> */}
 
-        <Route path="/items" element={<Navigate replace to="/products" />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductList productList={productList} setProductList={setProductList} />} />
+          <Route path="/products/:productId" element={<ProductDetails productList={productList} />} />
 
+          <Route path="/products/add" element={<AddProducts productList={productList} setProductList={setProductList} />} />
 
+          <Route path="/items" element={<Navigate replace to="/products" />} />
 
-        <Route path="/add-color" element={<AddColor />} />
-        <Route path="/profile" element={<UserList />} />
-
-        <Route path="/404" element={<NotFoundPage />} />
-        <Route path="*" element={<Navigate replace to="/404" />} />
-
-
-      </Routes>
-    </div>
+          <Route path="/add-color" element={<AddColor />} />
+          <Route path="/profile" element={<UserList />} />
+          <Route path="/context" element={<ExampleContext />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate replace to="/404" />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 
 
 
 export default App;
+
+
+//Task - 15 mins
+// /products/add => <AddProducts />
+//Add products => Product Added => /products (ProductList Page)
