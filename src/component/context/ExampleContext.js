@@ -1,5 +1,7 @@
 import React, { createContext, useContext } from 'react'
 import { Sample2 } from './Sample2'
+import Ref from './Ref'
+import Reducer from './Reducer'
 
 //1. creating - createContext  ✅
 //2. Publisher - provider - context.Provider ✅
@@ -13,10 +15,12 @@ function ExampleContext() {
     return (
         <NameContext.Provider value={name}>
             <div>
-                <h1>ExampleContext</h1>
-                <Sample />
+                {/* <h1>ExampleContext</h1> */}
+                <Reducer />
+                {/* <Ref /> */}
+                {/* <Sample />
                 <Sample1 />
-                <Sample2 />
+                <Sample2 /> */}
             </div>
         </NameContext.Provider>
 
