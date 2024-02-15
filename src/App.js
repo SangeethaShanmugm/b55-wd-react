@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import ExampleContext from "./component/context/ExampleContext";
+import TicTacToe from "./component/TicTacToe";
 
 export const INITIAL_PRODUCT_LIST = [
   {
@@ -130,6 +131,8 @@ function App() {
           <Button color="inherit" onClick={() => navigate("/add-color")}>AddColor</Button>
           <Button color="inherit" onClick={() => navigate("/profile")}>UserList</Button>
           <Button color="inherit" onClick={() => navigate("/context")}>Context</Button>
+          <Button color="inherit" onClick={() => navigate("/tic-tac-toe")}>TicTacToe</Button>
+
           <Button color="inherit"
             startIcon={mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             onClick={() => setMode(mode === "light" ? "dark" : "light")}>
@@ -161,6 +164,8 @@ function App() {
           <Route path="/add-color" element={<AddColor />} />
           <Route path="/profile" element={<UserList />} />
           <Route path="/context" element={<ExampleContext />} />
+          <Route path="/tic-tac-toe" element={<TicTacToe />} />
+
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate replace to="/404" />} />
         </Routes>

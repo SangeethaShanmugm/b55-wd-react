@@ -43,3 +43,26 @@
   flex-wrap: wrap;
   gap: 10px;
 }
+
+.full-game {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: min-content;
+}
+
+.game-box {
+  font-size: 5rem;
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid black;
+  text-align: center;
+  cursor: pointer;
+}
