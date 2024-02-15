@@ -105,7 +105,7 @@ export const INITIAL_PRODUCT_LIST = [
 
 function App() {
   // lifting the state up => lifted from child to parent
-  const [productList, setProductList] = useState(INITIAL_PRODUCT_LIST);
+  const [productList, setProductList] = useState([]);
   const [mode, setMode] = useState("light")
   const navigate = useNavigate()
 
@@ -118,6 +118,10 @@ function App() {
       mode: mode,
     },
   });
+
+  fetch("https://659e6ba547ae28b0bd35caec.mockapi.io/product")
+    .then((res) => res.json())
+    .then((data) => setProductList(data))
 
 
   return (
