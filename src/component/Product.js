@@ -8,7 +8,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import Button from '@mui/material/Button';
 
 
-export function Product({ product, id }) {
+export function Product({ product, id, deleteButton }) {
 
   const [show, setShow] = useState(true);
   const navigate = useNavigate()
@@ -55,7 +55,10 @@ export function Product({ product, id }) {
         <Button variant="contained">Add To Cart</Button>
 
       </div>
-      <Counter />
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <Counter />
+        {deleteButton}
+      </div>
     </div>
   );
 }

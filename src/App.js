@@ -6,7 +6,7 @@ import { UserList } from "./UserList"
 import { ProductList } from "./component/ProductList";
 import { Home } from "./component/Home";
 import { ProductDetails } from "./component/ProductDetails";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { NotFoundPage } from "./component/NotFoundPage";
 import { AddProducts } from "./component/AddProducts";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -18,6 +18,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import ExampleContext from "./component/context/ExampleContext";
 import TicTacToe from "./component/TicTacToe";
+import LifeCycleA from "./component/class/LifeCycleA";
 
 export const INITIAL_PRODUCT_LIST = [
   {
@@ -119,9 +120,6 @@ function App() {
     },
   });
 
-  fetch("https://659e6ba547ae28b0bd35caec.mockapi.io/product")
-    .then((res) => res.json())
-    .then((data) => setProductList(data))
 
 
   return (
@@ -136,6 +134,7 @@ function App() {
           <Button color="inherit" onClick={() => navigate("/profile")}>UserList</Button>
           <Button color="inherit" onClick={() => navigate("/context")}>Context</Button>
           <Button color="inherit" onClick={() => navigate("/tic-tac-toe")}>TicTacToe</Button>
+          <Button color="inherit" onClick={() => navigate("/class")}>Class</Button>
 
           <Button color="inherit"
             startIcon={mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
@@ -158,8 +157,8 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<ProductList productList={productList} setProductList={setProductList} />} />
-          <Route path="/products/:productId" element={<ProductDetails productList={productList} />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/products/:productId" element={<ProductDetails />} />
 
           <Route path="/products/add" element={<AddProducts productList={productList} setProductList={setProductList} />} />
 
@@ -169,6 +168,7 @@ function App() {
           <Route path="/profile" element={<UserList />} />
           <Route path="/context" element={<ExampleContext />} />
           <Route path="/tic-tac-toe" element={<TicTacToe />} />
+          <Route path="/class" element={<LifeCycleA />} />
 
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate replace to="/404" />} />
