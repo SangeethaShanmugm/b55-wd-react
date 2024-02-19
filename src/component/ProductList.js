@@ -4,10 +4,13 @@ import { INITIAL_PRODUCT_LIST } from "../App";
 import { API } from "./global";
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom"
+
 
 export function ProductList() {
   const [productList, setProductList] = useState([]);
-
+  const navigate = useNavigate()
   const getProducts = () => {
     fetch(`${API}`, {
       method: "GET"
@@ -34,8 +37,14 @@ export function ProductList() {
                 }}>
                 <DeleteIcon />
               </IconButton>
-
-            } />
+            }
+            editButton={
+              <IconButton aria-label="editBtn" color="error"
+                onClick={() => navigate(`/products/edit/${pd.id}`)}>
+                <EditIcon />
+              </IconButton>
+            }
+          />
         ))}
       </div>
     </div>

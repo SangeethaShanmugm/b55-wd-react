@@ -1,37 +1,43 @@
 import { useState, useEffect } from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { API } from "./global";
-// Add Products => 7:15
-// Input => 5 (name, poster, price, summary, rating )
-// button => add products
 
-export function AddProducts() {
-  const [productList, setProductList] = useState([]);
+export function EditProducts() {
+  // AddProduct + productDetails
 
-  const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [price, setPrice] = useState("");
-  const [rating, setRating] = useState("");
-  const [summary, setSummary] = useState("");
+  const { productId } = useParams();
+  const [product, setProduct] = useState(null);
 
+
+  useEffect(() => {
+    fetch(`${API}/${productId}`, {
+      method: "GET"
+    })
+      .then((res) => res.json())
+      .then((pd) => setProduct(pd))
+  }, [])//call only once
+
+  console.log(product)
+
+  return product ? <EditProductForm product={product} /> : "Loading..."
+
+}
+
+
+function EditProductForm({ product }) {
+
+
+  const [name, setName] = useState(product.name);
+  const [poster, setPoster] = useState(product.poster);
+  const [price, setPrice] = useState(product.price);
+  const [rating, setRating] = useState(product.rating);
+  const [summary, setSummary] = useState(product.summary);
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const storedProductList = JSON.parse(localStorage.getItem("productList"));
-    if (storedProductList) {
-      setProductList(storedProductList);
-    }
-  }, []); //called only once
-
-
-  useEffect(() => {
-    localStorage.setItem("productList", JSON.stringify(productList));
-  }, [productList]); //called every time when productList is updated
-
-  const handleAddProduct = () => {
-    const newProduct = {
+  const handleEditClick = () => {
+    const updatedProduct = {
       name,
       poster,
       price,
@@ -39,14 +45,12 @@ export function AddProducts() {
       summary,
     };
 
-    // copy productList and add new product
-    // setProductList([...productList, newProduct]);
-    //1. method - POST
+    //1. method - PUT
     //2. body - data  - JSON
     //3. headers- JSON
-    fetch(`${API}`, {
-      method: "POST",
-      body: JSON.stringify(newProduct),
+    fetch(`${API}/${product.id}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedProduct),
       headers: { 'Content-Type': 'application/json' }
     })
       .then((res) => res.json())
@@ -59,7 +63,7 @@ export function AddProducts() {
     setRating("");
     setSummary("");
 
-  };
+  }
 
   return (
     <div className="add-products">
@@ -80,7 +84,8 @@ export function AddProducts() {
       <TextField id="summary" label="Summary" variant="outlined" value={summary}
         onChange={(event) => setSummary(event.target.value)} />
 
-      <Button variant="contained" onClick={handleAddProduct}>Add Product</Button>
+      <Button variant="contained" color="success" onClick={handleEditClick}
+      >SAVE</Button>
     </div>
-  );
+  )
 }
