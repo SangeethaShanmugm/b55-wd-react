@@ -20,6 +20,7 @@ import ExampleContext from "./component/context/ExampleContext";
 import TicTacToe from "./component/TicTacToe";
 import LifeCycleA from "./component/class/LifeCycleA";
 import { EditProducts } from "./component/EditProducts";
+import BasicForm from "./component/BasicForm";
 
 export const INITIAL_PRODUCT_LIST = [
   {
@@ -136,6 +137,7 @@ function App() {
           <Button color="inherit" onClick={() => navigate("/context")}>Context</Button>
           <Button color="inherit" onClick={() => navigate("/tic-tac-toe")}>TicTacToe</Button>
           <Button color="inherit" onClick={() => navigate("/class")}>Class</Button>
+          <Button color="inherit" onClick={() => navigate("/basic-form")}>BasicForm</Button>
 
           <Button color="inherit"
             startIcon={mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
@@ -171,6 +173,7 @@ function App() {
           <Route path="/context" element={<ExampleContext />} />
           <Route path="/tic-tac-toe" element={<TicTacToe />} />
           <Route path="/class" element={<LifeCycleA />} />
+          <Route path="/basic-form" element={<BasicForm />} />
 
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate replace to="/404" />} />
