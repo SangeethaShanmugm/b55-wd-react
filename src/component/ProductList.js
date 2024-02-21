@@ -15,24 +15,24 @@ export function ProductList() {
   const [productList, setProductList] = useState([]);
   const navigate = useNavigate()
 
-  const getProducts = async () => {
-    try {
-      const response = await axios.get(`${API}`, { method: "GET" })
-      //Handle success response
-      toast.success("Data fetched successfully")
-      console.log(response.data)
-      // const result = await response.json()
-      setProductList(response.data)
-    } catch (error) {
-      //Handle error
-      toast.error("Failed to fetch product list")
-      console.error("Error while fetching product List", error)
-    }
-    // fetch(`${API}`, {
-    //   method: "GET"
-    // })
-    //   .then((res) => res.json())
-    //   .then((pds) => setProductList(pds))
+  const getProducts = () => {
+    // try {
+    //   const response = await axios.get(`${API}`, { method: "GET" })
+    //   //Handle success response
+    //   toast.success("Data fetched successfully")
+    //   console.log(response.data)
+    //   // const result = await response.json()
+    //   setProductList(response.data)
+    // } catch (error) {
+    //   //Handle error
+    //   toast.error("Failed to fetch product list")
+    //   console.error("Error while fetching product List", error)
+    // }
+    fetch(`${API}`, {
+      method: "GET"
+    })
+      .then((res) => res.json())
+      .then((pds) => setProductList(pds))
   }
 
 
